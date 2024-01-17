@@ -1,0 +1,89 @@
+# action.yml
+name: 'Create GPU'
+description: 'Deploy GPU and provide connection details'
+inputs:
+  access-key:
+    description: 'access-key'
+    required: true
+    default: ''
+  secret-key:
+    description: 'secret-key'
+    required: true
+    default: ''
+  ssh-key:
+    description: 'SSH key to add to the target VM to make it possible to connect to your VM'
+    required: true
+    default: ''
+  image:
+    description: 'OS Image to be installed on the target Virtual Machine Deployment like "Ubuntu-v22.04"'
+    required: false
+    default: 'Ubuntu-v22.04'
+  region:
+    description: 'Region where you want to deploy like "USA"'
+    required: false
+    default: 'USA'
+  cpu:
+    description: 'Number of CPU cores for your deployment'
+    required: false
+    default: '1'
+  ram:
+    description: 'Amount of RAM for your Deployment in GB'
+    required: false
+    default: '1'
+  disk-size:
+    description: 'Disk size for your Deployment in GB'
+    required: false
+    default: '10'
+  disk-type:
+    description: 'Disk type for your Deployment. Available options: hdd, ssd'
+    required: false
+    default: 'hdd'
+  assign-public-ipv4:
+    description: 'If true assigns a public ipv4 address for your Deployment'
+    required: false
+    default: 'false'
+  assign-public-ipv6:
+    description: 'If true assigns a public ipv6 address for your Deployment'
+    required: false
+    default: 'false'
+  assign-ygg-ip:
+    description: 'If true assigns a yggdrasil address for your Deployment'
+    required: false
+    default: 'false'
+  vpc-id:
+    description: 'ID of the vpc to deploy your VM into'
+    required: false
+    default: ''
+  host-name:
+    description: 'Host name for your Deployment'
+    required: false
+    default: ''
+outputs:
+  uuid:
+    description: 'uuid'
+  ip:
+    description: 'ip'
+  ipv6:
+    description: 'ipv6'
+  ygg:
+    description: 'ygg'
+  host:
+    description: 'host'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.access-key }}
+    - ${{ inputs.secret-key }}
+    - ${{ inputs.ssh-key }}
+    - ${{ inputs.image }}
+    - ${{ inputs.region }}
+    - ${{ inputs.cpu }}
+    - ${{ inputs.ram }}
+    - ${{ inputs.disk-size }}
+    - ${{ inputs.disk-type }}
+    - ${{ inputs.assign-public-ipv4 }}
+    - ${{ inputs.assign-public-ipv6 }}
+    - ${{ inputs.assign-ygg-ip }}
+    - ${{ inputs.vpc-id }}
+    - ${{ inputs.host-name }}
