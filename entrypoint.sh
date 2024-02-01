@@ -14,7 +14,7 @@ if [ "${@:12:1}" = "true" ]; then
   e+=" --assign_ygg_ip true"
 fi
 
-/usr/bin/deploy_script cpu create e
+/usr/bin/deploy_script cpu create $e
 
 export RESULT=$(cat result)
 
