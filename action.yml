@@ -21,7 +21,7 @@ inputs:
   region:
     description: 'Region where you want to deploy like "USA"'
     required: false
-    default: 'USA'
+    default: 'United States'
   cpu:
     description: 'Number of CPU cores for your deployment'
     required: false
@@ -56,7 +56,7 @@ inputs:
     default: ''
   host-name:
     description: 'Host name for your Deployment'
-    required: false
+    required: true
     default: ''
   ssh-key-name:
     description: 'SSH key name'
