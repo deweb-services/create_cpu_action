@@ -14,21 +14,53 @@
 
 **Required** Your ssh key to access deployment.
 
-## `name`
+## `ssh-key-name`
 
-Name of gpu you want to rent (all spaces must be replaced with underscore). Default `"RTX_4090"`.
+**Required** Your ssh key name.
 
 ## `image`
 
-Image you want to deploy (like image:tag). Default `"ubuntu:latest"`.
+OS Image to be installed on the target Virtual Machine Deployment like `"Ubuntu-v22.04"`.
 
 ## `region`
 
-Region where you want to deploy. Default `"Europe"`.
+Region where you want to deploy like `"USA"`.
 
-## `count`
+## `cpu`
 
-Count of gpus you want to deploy. Default `"1"`.
+Number of CPU cores for your deployment. Default `"1"`.
+
+## `ram`
+
+Amount of RAM for your Deployment in MB.
+
+## `disk-size`
+
+Disk size for your Deployment in MB
+
+## `disk-type`
+
+Disk type for your Deployment. Available options: hdd, ssd
+
+## `assign-public-ipv4`
+
+If true assigns a public ipv4 address for your Deployment
+
+## `assign-public-ipv6`
+
+If true assigns a public ipv6 address for your Deployment
+
+## `assign-ygg-ip`
+
+If true assigns a yggdrasil address for your Deployment
+
+## `vpc-id`
+
+ID of the vpc to deploy your VM into
+
+## `host-name`
+
+Host name for your Deployment
 
 ## Outputs
 
@@ -36,26 +68,35 @@ Count of gpus you want to deploy. Default `"1"`.
 
 UUID of your deployment.
 
+## `ip`
+
+IP
+
+## `ipv6`
+
+IPv6
+
+## `ygg`
+
+YGG
+
 ## `host`
 
-IP address of your deployment.
-
-## `port`
-
-Port of your deployment.
+YGG
 
 ## Example usage
 
     steps:
-      - name: Create gpu action step
-        id: create-gpu
-        uses: deweb-services/create_gpu_action@v0.12
+      - name: Create cpu action step
+        id: create-cpu
+        uses: deweb-services/create_cpu_action@v0.2
         with:
-          access-key: 'a12352244527cmzpxg74tq'
-          secret-key: 'jyezkpdq2hljjjkfqoiyrjjjgckgospjrm74fkmdik'
-          ssh-key: 'ssh-ed25519 AAAAC3afslHAsdkjHJKDFPY+6VWQaM ASDEW@gmail.com'
-          name: 'RTX_4090'
-          region: 'Europe'
+	        access-key: 'a12352244527cmzpxg74tq'
+	        secret-key: 'jyezkfffhljjjkfqoiyrjjjgckgospjrm74fkmdik'
+	        ssh-key: 'ssh-ed25519 AAAAC3afslHAsdkjHJKDFPY+6VWQaM ASDEW@gmail.com'
+	        region: 'USA'
+	        assign-public-ipv4: true
+	        host-name: 'my_deployment'
 
-      - name: Get the output
-        run: echo "The uuid is ${{ steps.create-gpu.outputs.uuid }}, the ip is ${{ steps.create-gpu.outputs.host }}, the port is ${{ steps.create-gpu.outputs.port }}"
+      - name: Get the output uuid
+        run: echo "The uuid was ${{ steps.create-cpu.outputs.uuid }}, the ip is ${{ steps.create-cpu.outputs.ip }}, the host is ${{ steps.create-cpu.outputs.host }}"

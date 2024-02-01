@@ -14,6 +14,10 @@ inputs:
     description: 'SSH key to add to the target VM to make it possible to connect to your VM'
     required: true
     default: ''
+  ssh-key-name:
+    description: 'SSH key name'
+    required: true
+    default: ''
   image:
     description: 'OS Image to be installed on the target Virtual Machine Deployment like "Ubuntu-v22.04"'
     required: false
@@ -27,13 +31,13 @@ inputs:
     required: false
     default: '1'
   ram:
-    description: 'Amount of RAM for your Deployment in GB'
+    description: 'Amount of RAM for your Deployment in MB'
     required: false
-    default: '1'
+    default: '1024'
   disk-size:
-    description: 'Disk size for your Deployment in GB'
+    description: 'Disk size for your Deployment in MB'
     required: false
-    default: '10'
+    default: '40960'
   disk-type:
     description: 'Disk type for your Deployment. Available options: hdd, ssd'
     required: false
@@ -87,3 +91,4 @@ runs:
     - ${{ inputs.assign-ygg-ip }}
     - ${{ inputs.vpc-id }}
     - ${{ inputs.host-name }}
+    - ${{ inputs.ssh-key-name }}
